@@ -2,7 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="FormularioCadastroUsuarioTest">
+        <State />
+      </entry>
+      <entry key="FormularioProdutoActivityTest">
+        <State />
+      </entry>
+      <entry key="LoginActivityTest">
+        <State />
+      </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="deveMostrarCamposNecessariosDeLoginNaTela()">
+        <State />
+      </entry>
+      <entry key="deveMostrarCamposNecessariosParaCadastrarUmProduto()">
         <State />
       </entry>
     </value>
