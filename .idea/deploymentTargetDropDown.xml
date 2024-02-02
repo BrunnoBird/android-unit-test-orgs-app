@@ -14,10 +14,10 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="deveMostrarCamposNecessariosDeLoginNaTela()">
+      <entry key="devePreencherTodosOsCamposDeLoginEntrarNoApp()">
         <State />
       </entry>
-      <entry key="deveMostrarCamposNecessariosParaCadastrarUmProduto()">
+      <entry key="deveSerCapazDePreencherOsCamposESalvar()">
         <State />
       </entry>
     </value>
