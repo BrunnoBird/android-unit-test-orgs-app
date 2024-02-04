@@ -20,7 +20,8 @@ class FormularioProdutoActivityTest {
     // context -> the instrumentation test context
     @Before
     fun setupEnvironment() {
-        AppDatabase.instancia(InstrumentationRegistry.getInstrumentation().targetContext
+        AppDatabase.instancia(
+            InstrumentationRegistry.getInstrumentation().targetContext
         ).clearAllTables()
     }
 
@@ -36,8 +37,9 @@ class FormularioProdutoActivityTest {
 
     @Test
     fun deveSerCapazDePreencherOsCamposESalvar() {
-        launch(FormularioProdutoActivity::class.java)
+        launch(ListaProdutosActivity::class.java)
 
+        onView(withId(R.id.activity_lista_produtos_fab)).perform(ViewActions.click())
         onView(withId(R.id.activity_formulario_produto_nome)).perform(
             ViewActions.typeText("Banana"),
             ViewActions.closeSoftKeyboard()
@@ -54,5 +56,42 @@ class FormularioProdutoActivityTest {
 
         launch(ListaProdutosActivity::class.java)
         onView(withText("Banana"))
+    }
+
+    @Test
+    fun deveSerCapazDeEditarUmProduto() {
+        launch(ListaProdutosActivity::class.java)
+
+        onView(withId(R.id.activity_lista_produtos_fab)).perform(ViewActions.click())
+        onView(withId(R.id.activity_formulario_produto_nome)).perform(
+            ViewActions.typeText("Banana"),
+            ViewActions.closeSoftKeyboard()
+        )
+        onView(withId(R.id.activity_formulario_produto_descricao)).perform(
+            ViewActions.typeText("Banana nanica"),
+            ViewActions.closeSoftKeyboard()
+        )
+        onView(withId(R.id.activity_formulario_produto_valor)).perform(
+            ViewActions.typeText("9.99"),
+            ViewActions.closeSoftKeyboard()
+        )
+        onView(withId(R.id.activity_formulario_produto_botao_salvar)).perform(ViewActions.click())
+        onView(withText("Banana")).perform(ViewActions.click())
+        onView(withId(R.id.menu_detalhes_produto_editar)).perform(ViewActions.click())
+        onView(withId(R.id.activity_formulario_produto_nome)).perform(
+            ViewActions.replaceText("Banana Nanica"),
+            ViewActions.closeSoftKeyboard()
+        )
+        onView(withId(R.id.activity_formulario_produto_descricao)).perform(
+            ViewActions.replaceText("Banana colhidas de pequenos produtores"),
+            ViewActions.closeSoftKeyboard()
+        )
+        onView(withId(R.id.activity_formulario_produto_valor)).perform(
+            ViewActions.replaceText("19.99"),
+            ViewActions.closeSoftKeyboard()
+        )
+        onView(withId(R.id.activity_formulario_produto_botao_salvar)).perform(ViewActions.click())
+
+        onView(withText("Banana nanica")).check(matches(isDisplayed()))
     }
 }
