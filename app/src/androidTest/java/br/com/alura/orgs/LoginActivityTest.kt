@@ -7,47 +7,34 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.platform.app.InstrumentationRegistry
-import br.com.alura.orgs.database.AppDatabase
 import br.com.alura.orgs.ui.activity.LoginActivity
 import org.junit.Test
 
 class LoginActivityTest {
 
-//    fun setupEnvironment() {
-//        AppDatabase.instancia(
-//            InstrumentationRegistry.getInstrumentation().targetContext
-//        ).clearAllTables()
-//    }
     @Test
-    fun deveMostrarNomeDoAplicativoQuandoEstaNaTelaDeLogin() {
+    fun deveRealizarLoginNoApp() {
+        fazLogin()
+    }
+
+    internal fun fazLogin() {
         ActivityScenario.launch(LoginActivity::class.java)
 
         onView(withText("Orgs")).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun deveTerTodosOsCamposNecessariosFazerLogin() {
-        ActivityScenario.launch(LoginActivity::class.java)
-
-        onView(withId(R.id.activity_login_usuario)).check(matches(isDisplayed()))
-        onView(withId(R.id.activity_login_senha)).check(matches(isDisplayed()))
-        onView(withId(R.id.activity_login_botao_entrar)).check(matches(isDisplayed()))
-        onView(withId(R.id.activity_login_botao_cadastrar)).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun devePreencherTodosOsCamposDeLoginEntrarNoApp() {
-        ActivityScenario.launch(LoginActivity::class.java)
-
-        onView(withId(R.id.activity_login_usuario)).perform(
-            ViewActions.typeText("massateste"),
-            ViewActions.closeSoftKeyboard()
-        )
-        onView(withId(R.id.activity_login_senha)).perform(
-            ViewActions.typeText("123456789"),
-            ViewActions.closeSoftKeyboard()
-        )
-        onView(withId(R.id.activity_login_botao_entrar)).perform(ViewActions.click())
+        onView(withId(R.id.activity_login_usuario))
+            .perform(
+                ViewActions.typeText("massateste"),
+                ViewActions.closeSoftKeyboard()
+            )
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.activity_login_senha))
+            .perform(
+                ViewActions.typeText("123456789"),
+                ViewActions.closeSoftKeyboard()
+            )
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.activity_login_botao_entrar))
+            .check(matches(isDisplayed()))
+            .perform(ViewActions.click())
     }
 }

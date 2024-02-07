@@ -5,56 +5,54 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.platform.app.InstrumentationRegistry
+import br.com.alura.orgs.database.AppDatabase
 import br.com.alura.orgs.ui.activity.FormularioCadastroUsuarioActivity
+import org.junit.Before
 import org.junit.Test
 
-class FormularioCadastroUsuarioTest {
+class CadastroUsuarioTeste {
 
-    @Test
-    fun deveTerTodosOsCamposNecessariosFazerCadastro() {
-        launch(FormularioCadastroUsuarioActivity::class.java)
-
-        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_usuario)).check(
-            ViewAssertions.matches(
-                ViewMatchers.isDisplayed()
-            )
-        )
-        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_email)).check(
-            ViewAssertions.matches(
-                ViewMatchers.isDisplayed()
-            )
-        )
-        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_senha)).check(
-            ViewAssertions.matches(
-                ViewMatchers.isDisplayed()
-            )
-        )
-        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_botao_cadastrar)).check(
-            ViewAssertions.matches(ViewMatchers.isDisplayed())
-        )
+    // targetContext -> the real context of application
+    // context -> the instrumentation test context
+    @Before
+    fun setupEnvironment() {
+        AppDatabase.instancia(
+            InstrumentationRegistry.getInstrumentation().targetContext
+        ).clearAllTables()
     }
 
     @Test
-    fun devePreencherCamposECadastrarUmUsuario() {
+    fun deveCadastrarUsuario() {
+        cadastraUsuario()
+    }
+
+    internal fun cadastraUsuario() {
         launch(FormularioCadastroUsuarioActivity::class.java)
 
-        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_usuario)).perform(
-            ViewActions.typeText(
-                "massateste"
-            ), ViewActions.closeSoftKeyboard()
-        )
-        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_email)).perform(
-            ViewActions.typeText(
-                "massateste@email.com"
-            ), ViewActions.closeSoftKeyboard()
-        )
-        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_senha)).perform(
-            ViewActions.typeText(
-                "123456789"
-            ), ViewActions.closeSoftKeyboard()
-        )
-        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_botao_cadastrar)).perform(
-            ViewActions.click()
-        )
+        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_usuario))
+            .perform(
+                ViewActions.typeText(
+                    "massateste"
+                ), ViewActions.closeSoftKeyboard()
+            )
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_email))
+            .perform(
+                ViewActions.typeText(
+                    "massateste@email.com"
+                ), ViewActions.closeSoftKeyboard()
+            )
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_senha))
+            .perform(
+                ViewActions.typeText(
+                    "123456789"
+                ), ViewActions.closeSoftKeyboard()
+            )
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.activity_formulario_cadastro_botao_cadastrar))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .perform(ViewActions.click())
     }
 }

@@ -2,22 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="FormularioCadastroUsuarioTest">
-        <State />
-      </entry>
-      <entry key="FormularioProdutoActivityTest">
-        <State />
-      </entry>
       <entry key="LoginActivityTest">
         <State />
       </entry>
+      <entry key="LoginSuite">
+        <State />
+      </entry>
+      <entry key="ProdutoSuite">
+        <State />
+      </entry>
+      <entry key="ProdutoTelasTest">
+        <State />
+      </entry>
+      <entry key="TesteSuite">
+        <State />
+      </entry>
       <entry key="app">
-        <State />
-      </entry>
-      <entry key="deveSerCapazDeEditarUmProduto()">
-        <State />
-      </entry>
-      <entry key="deveSerCapazDePreencherOsCamposESalvar()">
         <State />
       </entry>
     </value>
